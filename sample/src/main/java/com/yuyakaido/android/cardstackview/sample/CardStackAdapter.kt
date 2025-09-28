@@ -22,9 +22,14 @@ class CardStackAdapter(
         val spot = spots[position]
         holder.name.text = "${spot.id}. ${spot.name}"
         holder.city.text = spot.city
+        
+        // Add error handling and logging for image loading
         Glide.with(holder.image)
                 .load(spot.url)
+                .placeholder(android.R.drawable.ic_menu_gallery) // Add placeholder
+                .error(android.R.drawable.ic_dialog_alert) // Add error image
                 .into(holder.image)
+        
         holder.itemView.setOnClickListener { v ->
             Toast.makeText(v.context, spot.name, Toast.LENGTH_SHORT).show()
         }
